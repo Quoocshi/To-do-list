@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/Model/Todo.dart';
+import 'package:to_do_list/Model/todo.dart';
 
 class Taskbox extends StatelessWidget {
   final Todo task;
@@ -22,8 +22,12 @@ class Taskbox extends StatelessWidget {
       onLongPress: delete,
       onTap: info,
       child: Container(
-        decoration: const BoxDecoration(color: Colors.white),
-        padding: const EdgeInsets.symmetric(vertical: 25.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: const Color(0xFF7E64FF),
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.all(20),
         child: Row(
           children: [
             Checkbox(
@@ -34,15 +38,20 @@ class Taskbox extends StatelessWidget {
               children: [
                 Text(
                   task.taskName ?? "",
-                  style: const TextStyle(fontSize: 20),
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
                 ),
                 Text(
                   task.taskDue ?? "",
-                  style: const TextStyle(fontSize: 10),
+                  style: const TextStyle(
+                    fontSize: 10,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 40),
           ],
         ),
       ),
