@@ -4,16 +4,27 @@ import 'package:to_do_list/Model/todo.dart';
 import 'package:to_do_list/controller/controller.dart';
 import 'package:to_do_list/widgets/textfield.dart';
 
-class NewTask extends StatelessWidget {
+class NewTask extends StatefulWidget {
   NewTask({super.key});
+
+  @override
+  State<NewTask> createState() => _NewTaskState();
+}
+
+class _NewTaskState extends State<NewTask> {
   //normal controller
   final dynamic tasknameController = TextEditingController();
 
   final dynamic taskdescriptionController = TextEditingController();
 
   final dynamic taskdueController = TextEditingController();
+
   //getx controller
   final TaskController taskController = Get.find<TaskController>();
+
+  //Datetime
+  DateTime selectedDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     Todo temp;
@@ -60,11 +71,32 @@ class NewTask extends StatelessWidget {
                 maxline: 1,
               ),
               const SizedBox(height: 5),
-              TheTextField(
-                controller: taskdueController,
-                labelText: 'Due date: ',
-                size: 5,
-                maxline: 1,
+              Row(
+                children: [
+                  Expanded(
+                    child: TheTextField(
+                      controller: taskdueController,
+                      labelText: 'Due date: ',
+                      size: 5,
+                      maxline: 1,
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () async {
+                        final DateTime? dateTime = await showDatePicker(
+                            context: context,
+                            initialDate: selectedDate,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(3000));
+                        if (dateTime != null) {
+                          setState(() {
+                            taskdueController.text =
+                                '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+                          });
+                        }
+                      },
+                      icon: const Icon(Icons.date_range_rounded))
+                ],
               ),
               const SizedBox(height: 20),
               TheTextField(

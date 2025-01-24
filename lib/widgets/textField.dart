@@ -24,6 +24,7 @@ class TheTextField extends StatelessWidget {
         decoration: InputDecoration(
           prefixText: labelText,
           prefixStyle: const TextStyle(color: Colors.white),
+
           contentPadding: EdgeInsets.all(size),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           filled: true,

@@ -3,31 +3,40 @@ import 'package:hive/hive.dart';
 import 'package:to_do_list/Model/todo.dart';
 
 class TaskController extends GetxController {
-  final tasklist = Hive.box<Todo>('LocalDatabase').obs;
-  //var tasks = <Todo>[].obs;
+  var tasklist = <Todo>[].obs;
+  late Box<Todo> box;
+  @override
+  void onInit() {
+    super.onInit();
+    box = Hive.box<Todo>('LocalDatabase');
+    loadTasks();
+  }
+
+// Load dữ liệu từ box vào tasklist
+  void loadTasks() {
+    tasklist.value = box.values.toList().cast<Todo>();
+  }
+
+// Khi thực hiện phương thức nào đó, phải thức hiện cho cả tasklist và box
+// vì tasklist giúp hiển thị ngay lập tức khi thực hiện thao tác
+// còn box giúp lưu trữ dữ liệu sau khi tắt app
   void addTask(Todo task) {
-    if (tasklist.value.get(task.id)?.taskName != '') {
-      //tasks.add(task);
-      tasklist.value.put(task.id, task);
+    if (task.taskName!.isNotEmpty) {
+      box.put(task.id, task);
+      tasklist.add(task);
     }
-    tasklist.refresh();
   }
 
   void removeTask(int index) {
-    //tasks.removeAt(index);
-    var task = tasklist.value.getAt(index);
-    if (task != null) {
-      tasklist.value.delete(task.id);
-    }
-    tasklist.refresh();
+    var task = tasklist[index];
+    box.delete(task.id);
+    tasklist.removeAt(index);
   }
 
   void change(bool? p0, int index) {
-    //tasks[index].completeCheck = !tasks[index].completeCheck;
-    var task = tasklist.value.getAt(index);
-    task!.completeCheck = !task.completeCheck;
-    tasklist.value.putAt(index, task);
-    //tasks.refresh();
-    tasklist.refresh();
+    var task = tasklist[index];
+    task.completeCheck = p0 ?? false;
+    box.put(task.id, task);
+    tasklist[index] = task;
   }
 }

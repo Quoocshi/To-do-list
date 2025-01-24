@@ -43,21 +43,21 @@ class InfoScreen extends StatelessWidget {
             '${task.taskDescription?.isEmpty ?? true ? 'No task description' : task.taskDescription}',
             style: const TextStyle(fontSize: 25, color: Colors.white),
           ),
-          // const SizedBox(height: 20),
-          // const Text(
-          //   'Due date:',
-          //   style: TextStyle(
-          //     fontSize: 18,
-          //     color: Colors.white,
-          //   ),
-          // ),
-          // Text(
-          //   '${task.taskDue?.isEmpty ?? true ? 'No task due' : task.taskDue}',
-          //   style: const TextStyle(
-          //     fontSize: 25,
-          //     color: Colors.white,
-          //   ),
-          // ),
+          const SizedBox(height: 20),
+          const Text(
+            'Due date:',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+            ),
+          ),
+          Text(
+            '${task.taskDue?.isEmpty ?? true ? 'No task due' : task.taskDue}',
+            style: const TextStyle(
+              fontSize: 25,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
     );

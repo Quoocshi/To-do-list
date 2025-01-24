@@ -39,11 +39,11 @@ class MainScreen extends StatelessWidget {
         ),
         child: Obx(
           () => ListView.builder(
-            itemCount: taskcontroller.tasklist.value.length,
+            itemCount: taskcontroller.tasklist.length,
             itemBuilder: (context, index) {
-              final task = taskcontroller.tasklist.value.getAt(index);
+              final task = taskcontroller.tasklist[index];
               return Taskbox(
-                task: task!,
+                task: task,
                 completed: task.completeCheck,
                 onChanged: (p0) => taskcontroller.change(p0, index),
                 delete: () => taskcontroller.removeTask(index),
