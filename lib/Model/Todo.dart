@@ -13,11 +13,12 @@ class Todo {
   @HiveField(3)
   final String? taskDue;
   @HiveField(4)
-  bool completeCheck;
+  bool completeCheck = false;
   Todo({
+    required this.id,
     required this.taskName,
     required this.taskDescription,
     required this.taskDue,
     required this.completeCheck,
-  }) : id = DateTime.now().microsecondsSinceEpoch.toString();
+  });
 }

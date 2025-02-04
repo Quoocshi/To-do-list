@@ -41,7 +41,7 @@ class MainScreen extends StatelessWidget {
           () => ListView.builder(
             itemCount: taskcontroller.tasklist.length,
             itemBuilder: (context, index) {
-              final task = taskcontroller.tasklist[index];
+              var task = taskcontroller.tasklist[index];
               return Taskbox(
                 task: task,
                 completed: task.completeCheck,

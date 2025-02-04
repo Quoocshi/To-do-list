@@ -110,6 +110,7 @@ class _NewTaskState extends State<NewTask> {
                 onPressed: () => {
                   //temp variable
                   temp = Todo(
+                    id: DateTime.now().microsecondsSinceEpoch.toString(),
                     taskName: tasknameController.text,
                     taskDescription: taskdescriptionController.text,
                     taskDue: taskdueController.text,

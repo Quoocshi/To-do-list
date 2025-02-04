@@ -38,5 +38,6 @@ class TaskController extends GetxController {
     task.completeCheck = p0 ?? false;
     box.put(task.id, task);
     tasklist[index] = task;
+    tasklist.refresh();
   }
 }
