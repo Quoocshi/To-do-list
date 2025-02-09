@@ -4,62 +4,90 @@ import 'package:to_do_list/Model/todo.dart';
 class InfoScreen extends StatelessWidget {
   final Todo task;
   const InfoScreen({super.key, required this.task});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF7E64FF),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF7E64FF),
+        backgroundColor: Colors.green,
         title: const Text(
           'Task Info',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        elevation: 5,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Container(
+          padding: const EdgeInsets.all(20.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 10,
+                offset: Offset(0, 5),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildInfoRow('Title', task.taskName ?? 'No title'),
+              _buildDivider(),
+              _buildInfoRow(
+                  'Task Description',
+                  task.taskDescription?.isNotEmpty == true
+                      ? task.taskDescription!
+                      : 'No task description'),
+              _buildDivider(),
+              _buildInfoRow(
+                  'Due Date',
+                  task.taskDue?.isNotEmpty == true
+                      ? task.taskDue!
+                      : 'No due date'),
+            ],
+          ),
         ),
       ),
-      body: Column(
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Title:',
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-            ),
-          ),
           Text(
-            '${task.taskName}',
+            label,
             style: const TextStyle(
-              fontSize: 25,
-              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black54,
             ),
           ),
-          const SizedBox(height: 20),
-          const Text(
-            'Task description:',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          ),
+          const SizedBox(height: 4),
           Text(
-            // task.taskDescription?.isEmpty: return true if task description is empty but not null, return null if its null
-            // ?? true: if left is null (task.taskDescription?.isEmpty) pick right
-            '${task.taskDescription?.isEmpty ?? true ? 'No task description' : task.taskDescription}',
-            style: const TextStyle(fontSize: 25, color: Colors.white),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'Due date:',
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-            ),
-          ),
-          Text(
-            '${task.taskDue?.isEmpty ?? true ? 'No task due' : task.taskDue}',
+            value,
             style: const TextStyle(
-              fontSize: 25,
-              color: Colors.white,
+              fontSize: 18,
+              color: Colors.black87,
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildDivider() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Divider(color: Colors.black26, thickness: 1),
     );
   }
 }

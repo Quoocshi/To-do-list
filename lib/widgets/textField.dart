@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TheTextField extends StatelessWidget {
-  final dynamic controller;
+  final TextEditingController controller;
   final String labelText;
   final double size;
   final int maxline;
+
   const TheTextField({
     super.key,
     required this.controller,
@@ -16,23 +17,30 @@ class TheTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
         maxLines: maxline,
         controller: controller,
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.black),
         decoration: InputDecoration(
-          prefixText: labelText,
-          prefixStyle: const TextStyle(color: Colors.white),
-
+          labelText: labelText,
+          labelStyle: const TextStyle(color: Colors.black),
           contentPadding: EdgeInsets.all(size),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           filled: true,
-          fillColor: const Color(0xFF7E64FF),
-          border: InputBorder.none,
-          // border: OutlineInputBorder(
-          //   borderRadius: BorderRadius.circular(9),
-          // )
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(9),
+            borderSide: const BorderSide(color: Colors.grey),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(9),
+            borderSide: const BorderSide(color: Colors.grey),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(9),
+            borderSide: const BorderSide(color: Colors.blue),
+          ),
         ),
       ),
     );

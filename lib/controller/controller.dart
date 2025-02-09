@@ -17,9 +17,6 @@ class TaskController extends GetxController {
     tasklist.value = box.values.toList().cast<Todo>();
   }
 
-// Khi thực hiện phương thức nào đó, phải thức hiện cho cả tasklist và box
-// vì tasklist giúp hiển thị ngay lập tức khi thực hiện thao tác
-// còn box giúp lưu trữ dữ liệu sau khi tắt app
   void addTask(Todo task) {
     if (task.taskName!.isNotEmpty) {
       box.put(task.id, task);
@@ -33,9 +30,6 @@ class TaskController extends GetxController {
     tasklist.removeAt(index);
   }
 
-  //lỗi khi thay đổi trạng thái
-  //task sẽ tạo thêm task mới với trạng thái mới
-  //đồng thời không thể xóa task đó(đã fix)
   void change(bool? p0, int index) {
     var task = tasklist[index];
     task.completeCheck = p0 ?? false;

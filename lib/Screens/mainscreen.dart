@@ -9,37 +9,31 @@ class MainScreen extends StatelessWidget {
   MainScreen({super.key});
   final TaskController taskcontroller = Get.put(TaskController());
 
-  //final TaskController taskController1 = Get.find<TaskController>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: const Text(
-          'To Do',
+          'To-Do List',
           style: TextStyle(
-            color: Color(0xFFE5E5E7),
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        backgroundColor: Colors.green,
+        elevation: 5,
       ),
       body: Container(
+        padding: const EdgeInsets.all(16.0),
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF2A2A2E),
-              Color(0xFF1F1338),
-              Color(0xFF000000),
-            ],
-            stops: [0.18, 0.45, 0.85],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+          color: Colors.white,
         ),
         child: Obx(
-          () => ListView.builder(
+          () => ListView.separated(
             itemCount: taskcontroller.tasklist.length,
+            separatorBuilder: (_, __) => const SizedBox(height: 12),
             itemBuilder: (context, index) {
               var task = taskcontroller.tasklist[index];
               return Taskbox(
@@ -61,9 +55,9 @@ class MainScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF7E64FF),
-        foregroundColor: const Color(0xFFFFFFFF),
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.add, size: 30),
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(

@@ -13,11 +13,10 @@ class NewTask extends StatefulWidget {
 
 class _NewTaskState extends State<NewTask> {
   //normal controller
-  final dynamic tasknameController = TextEditingController();
-
-  final dynamic taskdescriptionController = TextEditingController();
-
-  final dynamic taskdueController = TextEditingController();
+  final TextEditingController tasknameController = TextEditingController();
+  final TextEditingController taskdescriptionController =
+      TextEditingController();
+  final TextEditingController taskdueController = TextEditingController();
 
   //getx controller
   final TaskController taskController = Get.find<TaskController>();
@@ -29,13 +28,14 @@ class _NewTaskState extends State<NewTask> {
   Widget build(BuildContext context) {
     Todo temp;
     return Scaffold(
-        extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.green,
           title: const Text(
             'New Task',
             style: TextStyle(
               color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
           leading: IconButton(
@@ -48,35 +48,24 @@ class _NewTaskState extends State<NewTask> {
           ),
         ),
         body: Container(
-          color: const Color(0xFF7E64FF),
-          // decoration: const BoxDecoration(
-          //   gradient: LinearGradient(
-          //     colors: [
-          //       Color(0xFF2A2A2E),
-          //       Color(0xFF1F1338),
-          //       Color(0xFF000000),
-          //     ],
-          //     stops: [0.18, 0.45, 0.85],
-          //     begin: Alignment.topCenter,
-          //     end: Alignment.bottomCenter,
-          //   ),
-          // ),
-          child: ListView(
+          color: Colors.white,
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //const SizedBox(height: 5),
               TheTextField(
                 controller: tasknameController,
-                labelText: 'Title: ',
+                labelText: 'Title:',
                 size: 5,
                 maxline: 1,
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Expanded(
                     child: TheTextField(
                       controller: taskdueController,
-                      labelText: 'Due date: ',
+                      labelText: 'Due date:',
                       size: 5,
                       maxline: 1,
                     ),
@@ -95,56 +84,61 @@ class _NewTaskState extends State<NewTask> {
                           });
                         }
                       },
-                      icon: const Icon(Icons.date_range_rounded))
+                      icon: const Icon(Icons.date_range_rounded,
+                          color: Colors.green))
                 ],
               ),
               const SizedBox(height: 20),
               TheTextField(
                 controller: taskdescriptionController,
-                labelText: 'Description: ',
+                labelText: 'Description:',
                 size: 5,
                 maxline: 5,
               ),
               const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () => {
-                  //temp variable
-                  temp = Todo(
-                    id: DateTime.now().microsecondsSinceEpoch.toString(),
-                    taskName: tasknameController.text,
-                    taskDescription: taskdescriptionController.text,
-                    taskDue: taskdueController.text,
-                    completeCheck: false,
-                  ),
-                  //call function
-                  taskController.addTask(temp),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => {
+                      //temp variable
+                      temp = Todo(
+                        id: DateTime.now().microsecondsSinceEpoch.toString(),
+                        taskName: tasknameController.text,
+                        taskDescription: taskdescriptionController.text,
+                        taskDue: taskdueController.text,
+                        completeCheck: false,
+                      ),
+                      //call function
+                      taskController.addTask(temp),
 
-                  //go back to mainscreen on tap
-                  Navigator.pop(context),
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF3A3372),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(70),
+                      //go back to mainscreen on tap
+                      Navigator.pop(context),
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(70),
+                      ),
+                      minimumSize: const Size(150, 50),
+                    ),
+                    child: const Text('Add', style: TextStyle(fontSize: 16)),
                   ),
-                  minimumSize: const Size(20, 50),
-                ),
-                child: const Text('Add'),
-              ),
-              const SizedBox(height: 15),
-              ElevatedButton(
-                //go back to mainscreen on tap
-                onPressed: () => Navigator.pop(context),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: const Color(0xFFFF636C),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(70),
+                  ElevatedButton(
+                    //go back to mainscreen on tap
+                    onPressed: () => Navigator.pop(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(70),
+                      ),
+                      minimumSize: const Size(150, 50),
+                    ),
+                    child: const Text('Cancel', style: TextStyle(fontSize: 16)),
                   ),
-                  fixedSize: const Size(20, 50),
-                ),
-                child: const Text('Cancel'),
+                ],
               ),
             ],
           ),

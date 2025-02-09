@@ -18,42 +18,34 @@ class Taskbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onLongPress: delete,
-      onTap: info,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: const Color(0xFF7E64FF),
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      elevation: 4,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        title: Text(
+          task.taskName ?? 'Untitled Task',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: task.completeCheck ? Colors.grey : Colors.black87,
+            decoration: task.completeCheck
+                ? TextDecoration.lineThrough
+                : TextDecoration.none,
+          ),
         ),
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          children: [
-            Checkbox(
-              value: completed,
-              onChanged: onChanged,
-            ),
-            Column(
-              children: [
-                Text(
-                  task.taskName ?? "",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  task.taskDue ?? "",
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ],
+        leading: Checkbox(
+          activeColor: Colors.green,
+          value: task.completeCheck,
+          onChanged: onChanged,
         ),
+        trailing: IconButton(
+          icon: const Icon(Icons.delete, color: Colors.redAccent),
+          onPressed: delete,
+        ),
+        onTap: info,
       ),
     );
   }
