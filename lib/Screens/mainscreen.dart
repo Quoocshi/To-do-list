@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:to_do_list/Screens/Routes/routes.dart';
 import 'package:to_do_list/Screens/info.dart';
-import 'package:to_do_list/Screens/taskscreen.dart';
 import 'package:to_do_list/domain/repository/task_repository.dart';
 import 'package:to_do_list/widgets/taskbox.dart';
 
@@ -51,13 +51,14 @@ class MainScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add, size: 30),
-        onPressed: () => Get.to(
-          () => NewTask(),
-        ),
-      ),
+          backgroundColor: Colors.green,
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.add, size: 30),
+          onPressed: () => Get.toNamed(AppRoutes.taskscreen)
+          // Get.to(
+          //   () => NewTask(),
+          // ),
+          ),
     );
   }
 }
