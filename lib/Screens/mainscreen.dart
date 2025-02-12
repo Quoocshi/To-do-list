@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:to_do_list/Screens/info.dart';
 import 'package:to_do_list/Screens/taskscreen.dart';
-import 'package:to_do_list/controller/controller.dart';
+import 'package:to_do_list/domain/repository/task_repository.dart';
 import 'package:to_do_list/widgets/taskbox.dart';
 
 class MainScreen extends StatelessWidget {
@@ -33,23 +33,19 @@ class MainScreen extends StatelessWidget {
         child: Obx(
           () => ListView.separated(
             itemCount: taskcontroller.tasklist.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 12),
+            separatorBuilder: (context, index) => const SizedBox(height: 12),
             itemBuilder: (context, index) {
               var task = taskcontroller.tasklist[index];
               return Taskbox(
-                task: task,
-                completed: task.completeCheck,
-                onChanged: (p0) => taskcontroller.change(p0, index),
-                delete: () => taskcontroller.removeTask(index),
-                info: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => InfoScreen(
-                      task: task,
-                    ),
-                  ),
-                ),
-              );
+                  task: task,
+                  completed: task.completeCheck,
+                  onChanged: (p0) => taskcontroller.change(p0, index),
+                  delete: () => taskcontroller.removeTask(index),
+                  info: () => Get.to(
+                        () => InfoScreen(
+                          task: task,
+                        ),
+                      ));
             },
           ),
         ),
@@ -58,11 +54,8 @@ class MainScreen extends StatelessWidget {
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add, size: 30),
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => NewTask(),
-          ),
+        onPressed: () => Get.to(
+          () => NewTask(),
         ),
       ),
     );

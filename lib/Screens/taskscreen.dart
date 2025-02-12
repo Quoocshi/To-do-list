@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:to_do_list/Model/todo.dart';
-import 'package:to_do_list/controller/controller.dart';
+import 'package:to_do_list/domain/Model/todo.dart';
+import 'package:to_do_list/domain/repository/task_repository.dart';
 import 'package:to_do_list/widgets/textfield.dart';
 
 class NewTask extends StatefulWidget {
@@ -40,7 +40,7 @@ class _NewTaskState extends State<NewTask> {
           ),
           leading: IconButton(
             //go back to mainscreen on tap
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Get.back(),
             icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
@@ -73,10 +73,11 @@ class _NewTaskState extends State<NewTask> {
                   IconButton(
                       onPressed: () async {
                         final DateTime? dateTime = await showDatePicker(
-                            context: context,
-                            initialDate: selectedDate,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(3000));
+                          context: context,
+                          initialDate: selectedDate,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(3000),
+                        );
                         if (dateTime != null) {
                           setState(() {
                             taskdueController.text =
@@ -113,7 +114,7 @@ class _NewTaskState extends State<NewTask> {
                       taskController.addTask(temp),
 
                       //go back to mainscreen on tap
-                      Navigator.pop(context),
+                      Get.back(),
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
@@ -127,7 +128,7 @@ class _NewTaskState extends State<NewTask> {
                   ),
                   ElevatedButton(
                     //go back to mainscreen on tap
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () => Get.back(),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,

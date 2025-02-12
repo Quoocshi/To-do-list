@@ -1,16 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:to_do_list/Model/todo.dart';
+import 'package:get/get.dart';
 import 'package:to_do_list/Screens/mainscreen.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'firebase_options.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //initialze hive
-  await Hive.initFlutter();
-  //Register Adapter
-  Hive.registerAdapter(TodoAdapter());
-  //open a box
-  await Hive.openBox<Todo>('LocalDatabase');
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyWidget());
 }
 
@@ -19,7 +15,7 @@ class MyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: MainScreen(),
     );
