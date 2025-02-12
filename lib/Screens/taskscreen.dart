@@ -40,7 +40,7 @@ class _NewTaskState extends State<NewTask> {
             ),
           ),
           leading: IconButton(
-            onPressed: () => Get.toNamed(AppRoutes.mainscreen),
+            onPressed: () => Get.offAllNamed(AppRoutes.mainscreen),
             icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
@@ -114,7 +114,7 @@ class _NewTaskState extends State<NewTask> {
                       taskController.addTask(temp),
 
                       //go back to mainscreen on tap
-                      Get.toNamed(AppRoutes.mainscreen),
+                      Get.offAllNamed(AppRoutes.mainscreen),
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
@@ -128,7 +128,7 @@ class _NewTaskState extends State<NewTask> {
                   ),
                   ElevatedButton(
                     //go back to mainscreen on tap
-                    onPressed: () => Get.toNamed(AppRoutes.mainscreen),
+                    onPressed: () => Get.offAllNamed(AppRoutes.mainscreen),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
