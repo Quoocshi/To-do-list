@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/Model/todo.dart';
+import 'package:to_do_list/domain/Model/todo.dart';
 
 class Taskbox extends StatelessWidget {
   final Todo task;
@@ -22,7 +22,7 @@ class Taskbox extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      elevation: 4,
+      elevation: 5,
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         title: Text(

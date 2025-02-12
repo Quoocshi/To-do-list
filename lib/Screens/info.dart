@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/Model/todo.dart';
+import 'package:to_do_list/domain/Model/todo.dart';
 
 class InfoScreen extends StatelessWidget {
   final Todo task;
@@ -28,7 +28,7 @@ class InfoScreen extends StatelessWidget {
             boxShadow: const [
               BoxShadow(
                 color: Colors.black26,
-                blurRadius: 10,
+                blurRadius: 40,
                 offset: Offset(0, 5),
               ),
             ],
