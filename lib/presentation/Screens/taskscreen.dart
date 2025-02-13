@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:to_do_list/Screens/Routes/routes.dart';
+import 'package:to_do_list/presentation/Routes/routes.dart';
 import 'package:to_do_list/domain/Model/todo.dart';
 import 'package:to_do_list/domain/repository/task_repository.dart';
-import 'package:to_do_list/widgets/textfield.dart';
+import 'package:to_do_list/presentation/widgets/textfield.dart';
 
 class NewTask extends StatefulWidget {
   NewTask({super.key});
