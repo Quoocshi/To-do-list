@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:to_do_list/Screens/Routes/routes.dart';
-import 'package:to_do_list/Screens/info.dart';
+import 'package:to_do_list/presentation/Routes/routes.dart';
+import 'package:to_do_list/presentation/Screens/info.dart';
 import 'package:to_do_list/domain/repository/task_repository.dart';
-import 'package:to_do_list/widgets/taskbox.dart';
+import 'package:to_do_list/presentation/widgets/taskbox.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
