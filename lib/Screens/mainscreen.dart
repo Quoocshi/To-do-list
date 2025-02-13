@@ -37,15 +37,16 @@ class MainScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               var task = taskcontroller.tasklist[index];
               return Taskbox(
-                  task: task,
-                  completed: task.completeCheck,
-                  onChanged: (p0) => taskcontroller.change(p0, index),
-                  delete: () => taskcontroller.removeTask(index),
-                  info: () => Get.to(
-                        () => InfoScreen(
-                          task: task,
-                        ),
-                      ));
+                task: task,
+                completed: task.completeCheck,
+                onChanged: (p0) => taskcontroller.change(p0, index),
+                delete: () => taskcontroller.removeTask(index),
+                info: () => Get.to(
+                  () => InfoScreen(
+                    task: task,
+                  ),
+                ),
+              );
             },
           ),
         ),
