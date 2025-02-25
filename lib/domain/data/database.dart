@@ -3,18 +3,18 @@ import 'package:to_do_list/domain/Model/todo.dart';
 
 class Database {
   final CollectionReference tasks =
-      FirebaseFirestore.instance.collection('todo');
+      FirebaseFirestore.instance.collection('thien_todo');
 
-  // Thêm task vào Firestore
   Future<void> addTask(Todo task) async {
     try {
-      await tasks.doc(task.id).set(task.toMap());
+      if (task.taskName!.isNotEmpty) {
+        await tasks.doc(task.id).set(task.toMap());
+      }
     } catch (e) {
       print('Lỗi khi thêm task: $e');
     }
   }
 
-  // Xóa task từ Firestore
   Future<void> deleteTask(String id) async {
     try {
       await tasks.doc(id).delete();
@@ -33,6 +33,7 @@ class Database {
 
   // Lấy danh sách tasks từ Firestore
   Stream<List<Todo>> getTasks() {
+    //print('${tasks.snapshots()}');
     return tasks.snapshots().map((snapshot) {
       return snapshot.docs
           .map((doc) => Todo.fromMap(doc.data() as Map<String, dynamic>))
